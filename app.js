@@ -25,3 +25,5 @@ app.get('/', (req,res) => {
 })
 
 app.use("/categorias", rutaCategorias);
+
+// ESTO ES UNA PRUEBA DE QUE ENZO HIZO BIEN EL REPO
