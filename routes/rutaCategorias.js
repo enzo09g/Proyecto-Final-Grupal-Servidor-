@@ -9,9 +9,9 @@ https://japceibal.github.io/emercado-api/user_cart/
 const express = require('express')
 const rutaCategorias = express.Router()
 
-const controlesCategorias = require("../controllers/controllers");
+const controles = require("../controllers/controllers");
 
-rutaCategorias.get("/", controlesCategorias.crearCategorias);
+rutaCategorias.get("/", controles.crearCategorias);
 
 
 
