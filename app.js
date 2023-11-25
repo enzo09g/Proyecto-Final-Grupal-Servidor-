@@ -12,11 +12,13 @@ const rutaCategorias = require('./routes/rutaCategorias');
 const rutaCatProductos = require('./routes/rutaCatProductos');
 const rutaProducto = require('./routes/rutaProducto');
 const rutaComentarios = require('./routes/rutaComentarios');
-const rutaCarrito = require('./routes/rutaCarrito');
 const { error } = require('console');
-const { json } = require('body-parser');
-const rutaCarritoUsuario = require('./routes/rutaCarritoUsuario');
+const bodyParser  = require('body-parser');
+const rutaCarrito = require('./routes/rutaCarrito');
 const usuarios = require('./jsons/users/users.json');
+const rutaCrearCompra = require('./routes/rutaCrearCompra');
+
+const CORS = require('cors')
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -26,20 +28,63 @@ app.use((req, res, next) => {
 
 });
 
+app.use(CORS());
+
+app.use(bodyParser.json())
+
 //DESAFIATE - INCIO
 
-app.get('/cart', (req, res) => {
-    fs.readFile('./jsons/user_cart/25801.json', 'utf8', (err, data) => {
-        if (err) {
-            res.send("Ocurrió un error");
-        } else {
-            res.send(JSON.parse(data));
-        }
-    });
+// app.get('/cart', (req, res) => {
+//     fs.readFile('./jsons/user_cart/25801.json', 'utf8', (err, data) => {
+//         if (err) {
+//             res.send("Ocurrió un error");
+//         } else {
+//             res.send(JSON.parse(data));
+//         }
+//     });
 
-})
+// })
 
-app.post('/cart', (req, res) => {
+
+app.post("/login", (req, res) => {
+    
+    const {email, pass} = req.body;
+    
+    if (!email || !pass){
+        return res.status(401).json({msj: 'Falta usuario o contraseña'});
+    }
+
+    const usuarioExiste = usuarios.find(user=> user.email ===email && user.pass===pass);
+    if (!usuarioExiste){
+        return res.status(401).json({msj:'Usuario o clave no válidos'});
+    }
+  
+    const token = jwt.sign({userId: email.id, username:usuarioExiste.usuarios},key/*,{expiresIn: Math.floor(Date.now()/100)+10}*/);
+    res.token = token;
+    res.send({token});
+});
+
+app.use("/cart", (req, res, next) => {
+    try {
+        const decoded = jwt.verify(req.headers["access-token"], key);
+        console.log(decoded);
+        next();
+    } catch (err) {
+        res.status(401).json({ message: "Usuario no autorizado" });
+    }
+});
+
+app.listen(port, () =>{
+    console.log("Bienvenido a nuestro potentismo servidor cuántico, corriendo en el puerto: " + port )
+});
+
+//DESAFIATE - FINAL
+
+app.get('/', (req, res) => {
+    res.send("<h1>Servidor</h1>")
+});
+
+app.post('/cart/:id', (req, res) => {
 
     fs.readFile('./jsons/user_cart/25801.json', 'utf8', (err, data) => {
         if (err) {
@@ -68,45 +113,6 @@ app.post('/cart', (req, res) => {
     });
   });
 
-app.post("/login", (req, res) => {
-
- const {usuario, contraseña} = req.body;
-    
-  if (!usuario || !contraseña){
-        return res.status(401).json({msj: 'Falta usuario o contraseña'});
-    }
-
-    const usuarioExiste = usuarios.find(user=> user.usuario ===usuario && user.contraseña===contraseña);
-    if (!usuarioExiste){
-        return res.status(401).json({msj:'Usuario o clave no válidos'});
-    }
-  
-    const token = jwt.sign({userId: usuario.id, username:usuarioExiste.usuarios},key/*,{expiresIn: Math.floor(Date.now()/100)+10}*/);
-    res.token = token;
-    res.send(token);
-});
-
-app.use("/cart", (req, res, next) => {
-    try {
-        const decoded = jwt.verify(req.headers["access-token"], key);
-        console.log(decoded);
-        next();
-    } catch (err) {
-        res.status(401).json({ message: "Usuario no autorizado" });
-    }
-});
-
-app.listen(port, () =>{
-    console.log("Bienvenido a nuestro potentismo servidor cuántico, corriendo en el puerto: " + port )
-});
-
-//DESAFIATE - FINAL
-
-app.get('/', (req, res) => {
-    res.send("<h1>Servidor</h1>")
-});
-
-
 app.use("/categorias", rutaCategorias);
 
 app.use("/categoria_productos", rutaCatProductos);
@@ -115,9 +121,9 @@ app.use("/producto", rutaProducto);
 
 app.use("/comentarios", rutaComentarios);
 
-app.use("/cart", rutaCarrito);
+app.use("/confirmacion_compra", rutaCrearCompra);
 
-app.use("/usuario_carrito", rutaCarritoUsuario);
+app.use("/cart", rutaCarrito);
 
 
 // ESTO ES UNA PRUEBA DE QUE ENZO HIZO BIEN EL REPO

@@ -3,6 +3,6 @@ const rutaCarrito = express.Router()
 
 const controles = require("../controllers/controllers");
 
-rutaCarrito.get("/", controles.crearCarrito);
+rutaCarrito.get("/:id", controles.crearCarrito);
 
 module.exports = rutaCarrito;

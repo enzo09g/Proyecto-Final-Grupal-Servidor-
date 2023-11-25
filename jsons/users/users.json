@@ -1,42 +1,42 @@
 [
     {
-        "usuario": "punta.D.lanz@gmail.com",
-        "contraseña": "santilanz1234"
+        "email": "punta.D.lanz@gmail.com",
+        "pass": "santilanz1234"
     },
     {
-        "usuario": "ignaciopignalosa@gmail.com",
-        "contraseña": "nachitorapero3000"
+        "email": "ignaciopignalosa@gmail.com",
+        "pass": "nachitorapero3000"
     },
     {
-        "usuario": "EnzoBuscaPleito@gmail.com",
-        "contraseña": "andTheyCallItAMine"
+        "email": "EnzoBuscaPleito@gmail.com",
+        "pass": "andTheyCallItAMine"
     },
     {
-        "usuario": "rodrirompecosas@gmail.com",
-        "contraseña": "yonorompinada"
+        "email": "rodrirompecosas@gmail.com",
+        "pass": "yonorompinada"
     },
     {
-        "usuario": "lauraEstrellada@gmail.com",
-        "contraseña": "LaFronteraFinal"
+        "email": "lauraEstrellada@gmail.com",
+        "pass": "LaFronteraFinal"
     },
     {
-        "usuario": "el-periodista@gmail.com",
-        "contraseña": "entrevisteacr7"
+        "email": "el-periodista@gmail.com",
+        "pass": "entrevisteacr7"
     },
     {
-        "usuario": "MartinMartinez@gmail.com",
-        "contraseña": "MartinMartin"
+        "email": "MartinMartinez@gmail.com",
+        "pass": "MartinMartin"
     },
     {
-        "usuario": "heyjuan-bajonero@gmail.com",
-        "contraseña": "1megamente"
+        "email": "heyjuan-bajonero@gmail.com",
+        "pass": "1megamente"
     },
     {
-        "usuario": "throwIttothe_Floor@gmail.com",
-        "contraseña": "elNeneEstaBien"
+        "email": "throwIttothe_Floor@gmail.com",
+        "pass": "elNeneEstaBien"
     },
     {
-        "usuario": " ",
-        "contraseña": " "
+        "email": " ",
+        "pass": " "
     }
 ]

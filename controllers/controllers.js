@@ -19,14 +19,14 @@ const crearCategorias = (req,res)=>{
     res.json(comentarios)
    }
 
-   const crearCarritoUsuario = (req, res) =>{
+   const crearCarrito = (req, res) =>{
     let infoCarrito = require(`../jsons/user_cart/${req.params.id}`)
     res.json(infoCarrito)
    }
 
-   const crearCarrito = (req, res) =>{
-    let infoCarrito = require(`../jsons/cart/buy.json`)
-    res.json(infoCarrito)
+   const crearCompra = (req, res) =>{
+    let crearConfirmacion = require(`../jsons/cart/buy.json`)
+    res.json(crearConfirmacion)
    }
 
   module.exports = {
@@ -34,8 +34,8 @@ const crearCategorias = (req,res)=>{
     crearProductos,
     crearProducto,
     crearComentarios,
-    crearCarritoUsuario,
     crearCarrito,
+    crearCompra
   };
     
 
