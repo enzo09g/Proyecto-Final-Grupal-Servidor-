@@ -5,4 +5,6 @@ const controles = require("../controllers/controllers");
 
 rutaCarrito.get("/:id", controles.crearCarrito);
 
+rutaCarrito.post("/:id", controles.crearCaballo)
+
 module.exports = rutaCarrito;
