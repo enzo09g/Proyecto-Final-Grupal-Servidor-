@@ -11,6 +11,7 @@ const rutaCatProductos = require('./routes/rutaCatProductos');
 const rutaProducto = require('./routes/rutaProducto');
 const rutaComentarios = require('./routes/rutaComentarios');
 const rutaCarrito = require('./routes/rutaCarrito');
+const rutaCarritoUsuario = require('./routes/rutaCarritoUsuario');
 const usuarios = require('./jsons/users/users.json');
 
 app.use((req, res, next) => {
@@ -38,8 +39,18 @@ app.post("/login", (req, res) => {
     res.send(token);
 });
 
+app.use("/cart", (req, res, next) => {
+    try {
+        const decoded = jwt.verify(req.headers["access-token"], key);
+        console.log(decoded);
+        next();
+    } catch (err) {
+        res.status(401).json({ message: "Usuario no autorizado" });
+    }
+});
+
 app.listen(port, () =>{
-    console.log("Bienvenido a nuestro potentismo servidor lleno de errores, corriendo en el puerto: " + port )
+    console.log("Bienvenido a nuestro potentismo servidor cuántico, corriendo en el puerto: " + port )
 });
 
 app.get('/', (req,res) => {
@@ -54,7 +65,9 @@ app.use("/producto", rutaProducto);
 
 app.use("/comentarios", rutaComentarios);
 
-app.use("/usuario_carrito", rutaCarrito);
+app.use("/cart", rutaCarrito);
+
+app.use("/usuario_carrito", rutaCarritoUsuario);
 
 
 // ESTO ES UNA PRUEBA DE QUE ENZO HIZO BIEN EL REPO

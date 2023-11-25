@@ -19,8 +19,13 @@ const crearCategorias = (req,res)=>{
     res.json(comentarios)
    }
 
-   const crearCarrito = (req, res) =>{
+   const crearCarritoUsuario = (req, res) =>{
     let infoCarrito = require(`../jsons/user_cart/${req.params.id}`)
+    res.json(infoCarrito)
+   }
+
+   const crearCarrito = (req, res) =>{
+    let infoCarrito = require(`../jsons/cart/buy.json`)
     res.json(infoCarrito)
    }
 
@@ -29,7 +34,8 @@ const crearCategorias = (req,res)=>{
     crearProductos,
     crearProducto,
     crearComentarios,
-    crearCarrito
+    crearCarritoUsuario,
+    crearCarrito,
   };
     
 
